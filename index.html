@@ -1,106 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel.Design;
-using UnityEngine;
-using UnityEngine.UIElements;
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Страничка</title>
+	</head>
+	<body>
+	Какой-то текст
 
-public class II : MonoBehaviour
-{
-    public float Speed = 10;
-    public float r = 75;
-    public AudioSource Go;
-    private float _yRotate;
-    private float _xRotate;
-    public Transform Turret;
-    public Transform Muzzle;
-    public float RotationSpeed = 30;
-    public float MuzzleRotationSpeed = 100;
-    public GameObject T;
-    public Transform Tank;
-    private bool isMoving = false;
-    private float TimerRemove;
-
-    void Start()
-    {
-        T = GameObject.Find("Tank");
-        Tank = T.transform;
-    }
-    void Update()
-    {
-        TimerRemove += Time.deltaTime;
-
-        //GetComponent<Rigidbody>().velocity = 1 * Speed * transform.forward;
-        //GetComponent<Rigidbody>().angularVelocity = new Vector3(0, 0.5f, 0) * r;
-
-        Vector3 t = Tank.position;                                            
-        Vector3 target = t - transform.position;
-        float Angel = Vector3.Angle(target, transform.forward);
-        float AngelRight = Vector3.Angle(target, transform.right);
-        float distance = Vector3.Distance(transform.position, Tank.position); 
-
-        if (Angel > 30f)                                                                   
-        {
-            if (AngelRight < 90f)
-            {
-                GetComponent<Rigidbody>().angularVelocity = new Vector3(0, 0.5f, 0) * r;
-            }
-            else if (AngelRight > 90)
-            {
-                GetComponent<Rigidbody>().angularVelocity = new Vector3(0, -0.5f, 0) * r;
-            }
-        }
-
-        if (TimerRemove > 10f)
-        {
-            if (distance > 30f)
-            {
-                if (Angel < 5f)
-                {
-                    GetComponent<Rigidbody>().velocity = 1 * Speed * transform.forward;
-                } 
-                else if (AngelRight < 90f)
-                {
-                    GetComponent<Rigidbody>().angularVelocity = new Vector3(0, 0.5f, 0) * r;
-                    GetComponent<Rigidbody>().velocity = 1 * Speed * transform.forward;
-                }
-                else if (AngelRight > 90f)
-                {
-                    GetComponent<Rigidbody>().angularVelocity = new Vector3(0, -0.5f, 0) * r;
-                    GetComponent<Rigidbody>().velocity = 1 * Speed * transform.forward;
-                }
-            }
-        }
-
-        if (distance < 20f)
-        {
-            TimerRemove = 0;
-            if (Angel < 5f)
-            {
-                GetComponent<Rigidbody>().velocity = -1 * Speed * transform.forward;
-            }
-            else if (AngelRight < 90f)
-            {
-                GetComponent<Rigidbody>().angularVelocity = new Vector3(0, 0.5f, 0) * r;
-                GetComponent<Rigidbody>().velocity = -1 * Speed * transform.forward;
-            }
-            else if (AngelRight > 90f)
-            {
-                GetComponent<Rigidbody>().angularVelocity = new Vector3(0, -0.5f, 0) * r;
-                GetComponent<Rigidbody>().velocity = -1 * Speed * transform.forward;
-            }
-        }
-
-        if (!isMoving && (GetComponent<Rigidbody>().velocity.magnitude > 0.1f || GetComponent<Rigidbody>().angularVelocity.magnitude > 0.1f))
-        {
-            Go.Play();
-            isMoving = true;
-        }
-        else if (isMoving && GetComponent<Rigidbody>().velocity.magnitude < 0.1f && GetComponent<Rigidbody>().angularVelocity.magnitude < 0.1f)
-        {
-            Go.Stop();
-            isMoving = false;
-        }
-
-        Turret.transform.LookAt(Tank);                                                                                  
-        Turret.transform.Rotate(Turret.transform.localEulerAngles.x * -1, 0, Turret.transform.localEulerAngles.z * -1); 
-    }
+	<img src="/kartinka.jpg">
+	</body>
+</html>
